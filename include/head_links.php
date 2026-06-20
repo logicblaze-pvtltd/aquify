@@ -23,13 +23,13 @@
     <?php
     if (isset($_SESSION['id']) && $_SESSION['role'] == "retailer") {
     ?>
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/<?php echo $_SESSION['image'] ?>">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_io/android-chrome-512x512.png">
         <title>
             <?php echo $_SESSION['name'] . ' - Dashboard';
             ?>
         </title><?php
             } else { ?>
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo.png">
+            <link rel="shortcut icon" href="../assets/favicon_io/android-chrome-512x512.png">
         <title>
             <?php
                 echo (defined('APP_NAME') ? APP_NAME : 'Aquify') . ' - Water Management System';
@@ -42,7 +42,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/favicon_io/android-chrome-512x512.png">
 
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
