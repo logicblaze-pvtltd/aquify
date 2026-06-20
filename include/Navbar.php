@@ -3,29 +3,38 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
+                <?php
+                $logo_name = "";
+                if ($_SESSION['role'] == "admin") {
+                    $logo_name = (defined('APP_NAME') ? APP_NAME : 'Aquify');
+                } else if ($_SESSION['role'] == "retailer") {
+                    $logo_name = $_SESSION['name'];
+                }
+                
+                // Extract initials
+                $logo_initials = "";
+                preg_match_all('/[A-Z]/', $logo_name, $matches);
+                if (count($matches[0]) >= 2) {
+                    $logo_initials = $matches[0][0] . $matches[0][1];
+                } else {
+                    $logo_initials = strtoupper(substr($logo_name, 0, 2));
+                }
+                ?>
                 <a href="index.php" class="logo logo-dark">
-
+                    <span class="logo-sm">
+                        <?php echo $logo_initials; ?>
+                    </span>
                     <span class="logo-lg">
-                    <?php
-                        if ($_SESSION['role'] == "admin") {
-                            echo 'LogicBlaze';
-                        } else if ($_SESSION['role'] == "retailer") {
-                            echo $_SESSION['name'];
-                        }
-                        ?>
+                        <?php echo $logo_name; ?>
                     </span>
                 </a>
 
                 <a href="index.php" class="logo logo-light">
-
+                    <span class="logo-sm">
+                        <?php echo $logo_initials; ?>
+                    </span>
                     <span class="logo-lg">
-                        <?php
-                        if ($_SESSION['role'] == "admin") {
-                            echo 'LogicBlaze';
-                        } else if ($_SESSION['role'] == "retailer") {
-                            echo $_SESSION['name'];
-                        }
-                        ?>
+                        <?php echo $logo_name; ?>
                     </span>
                 </a>
             </div>

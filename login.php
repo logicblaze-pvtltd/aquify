@@ -124,80 +124,129 @@ if (isset($_POST['login'])) {
 <head>
     <?php include "./include/head_links.php" ?>
 </head>
-<body>
-    <div style="width: 30px; height: 200px; background-color: #3498db; transform: rotate(45deg); position: absolute; margin-top:-5%;"></div>
-    <div style="width: 30px; height: 300px; background-color: #001F3F; transform: rotate(45deg); position: absolute; margin-top:-5%"></div>
-    <div class="account-pages my-1 pt-sm-5">
-        <div class="container">
-            <h2 class="text-center"><span>For Bill Inquiry</span> <a href="inquiry.php">Click Here</a></h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div class="card shadow rounded-4">
-                        <div class="bg-primary bg-soft rounded-4">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="text-primary p-4">
-                                        <h5 class="text-primary">Welcome Back to <strong class="form-footer-text">LogicBlaze</strong>  Water Management System</h5>
-                                        <p>Log in to your account.</p>
-                                    </div>
-                                </div>
-                                <div class="col-4 align-self-end">
-                                    <img src="assets/images/login-image.png" alt="" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="auth-logo">
-                                <a href="#" class="auth-logo-light">
-                                    <div class="avatar-md profile-user-wid mb-4">
-                                        <span class="avatar-title rounded-circle">
-                                            <img src="assets/images/logo.png" alt="" class="rounded-circle" height="75">
-                                        </span>
-                                    </div>
-                                </a>
-                                <a href="#" class="auth-logo-dark">
-                                    <div class="avatar-md profile-user-wid mb-4">
-                                        <span class="avatar-title rounded-circle bg-light">
-                                            <img src="assets/images/logo.png" alt="" class="rounded-circle" height="75">
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="p-2">
-                                <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label"><strong>Username</strong></label>
-                                        <input type="email" class="form-control" name="username" id="username" placeholder="Enter username" style="border-radius:0px; border:none; border-bottom:2px solid blue; outline:none;">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" ><strong>Password</strong></label>
-                                        <div class="input-group auth-pass-input-group">
-                                            <input type="password" class="form-control" name="password" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon" style="border-radius:0px; border:none; border-bottom:2px solid blue; outline:none;">
-                                            <button class="btn btn-light" type="button" id="password-addon" style="border-radius:0px; border:none; border-bottom:2px solid blue; background:transparent; color:white"><i class="mdi mdi-eye-outline"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col form-check ms-2">
-                                            <input class="form-check-input" type="checkbox" id="remember-check" style="background-color: transparent; border: 1px solid white;">
-                                            <label class="form-check-label" for="remember-check" style="color:white;">Remember me</label>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-grid">
-                                        <button class="btn btn-primary waves-effect waves-light" type="submit" name="login">Log In</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-center">
-                        <div>
-                            <p>© <script>document.write(new Date().getFullYear())</script> Designed & Developed with  <i class="bi bi-heart-fill text-danger"></i> by <a href=""><strong class="form-footer-text">LogicBlaze</strong></a></p>
-                        </div>
+<body class="login-body-bg">
+    <!-- Login Loader Overlay -->
+    <div id="login-loader" style="display: none;">
+        <div class="login-spinner-container">
+            <div class="login-spinner"></div>
+            <p class="login-loader-text">Logging in, please wait...</p>
+        </div>
+    </div>
+
+    <!-- Ambient Animated Background Blobs -->
+    <div class="login-bg-blobs">
+        <div class="login-blob login-blob-1"></div>
+        <div class="login-blob login-blob-2"></div>
+        <div class="login-blob login-blob-3"></div>
+    </div>
+
+    <!-- Centralized Card Wrapper -->
+    <div class="login-flex-container">
+        <div class="login-glass-card">
+            <!-- Theme Toggle Button -->
+            <!-- <button id="login-theme-toggle" class="login-theme-toggle-btn" type="button">
+                <i class="bi bi-moon"></i>
+            </button>
+             -->
+            <!-- Branding Section -->
+            <div class="login-brand-header">
+                <div class="login-logo-ring">
+                    <img src="assets/images/logo.png" alt="Logo">
+                </div>
+                <h4 class="login-title-primary">Welcome to <span><?php echo (defined('APP_NAME') ? APP_NAME : 'Aquify'); ?></span></h4>
+                <p class="login-subtitle-secondary">Water Management System - Sign In</p>
+            </div>
+
+            <!-- Form -->
+            <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <div class="login-field-wrapper">
+                    <label for="username" class="login-field-label">Username / Email</label>
+                    <div class="login-input-container">
+                        <input type="email" class="login-custom-input" name="username" id="username" placeholder="name@example.com" required>
+                        <i class="bi bi-envelope login-input-icon"></i>
                     </div>
                 </div>
+
+                <div class="login-field-wrapper">
+                    <label class="login-field-label">Password</label>
+                    <div class="login-input-container">
+                        <input type="password" class="login-custom-input" name="password" id="login-password" placeholder="••••••••" required>
+                        <i class="bi bi-lock login-input-icon"></i>
+                        <button class="login-eye-btn" type="button" id="password-addon">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-remember-container">
+                    <label class="login-checkbox-label" for="remember-check">
+                        <input class="login-checkbox-input" type="checkbox" id="remember-check">
+                        Remember me
+                    </label>
+                </div>
+
+                <button class="login-submit-btn" type="submit" name="login">Log In</button>
+            </form>
+
+            <!-- Bill Inquiry Alert Box -->
+            <div class="login-inquiry-box">
+                <i class="bi bi-info-circle-fill me-1"></i> Looking for bill inquiry?
+                <a href="inquiry.php">Click Here</a>
+            </div>
+
+            <!-- Footer Copy -->
+            <div class="login-footer-copy">
+                <p>© <script>document.write(new Date().getFullYear())</script> Designed & Developed with <i class="bi bi-heart-fill"></i> by <a href="<?php echo (defined('APP_URL') ? APP_URL : 'http://localhost/aquify'); ?>"><?php echo (defined('APP_NAME') ? APP_NAME : 'Aquify'); ?></a></p>
             </div>
         </div>
     </div>
+
     <?php include "./include/footer_link.php" ?>
+    <script>
+        // Toggle loader overlay
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('login-loader').style.display = 'flex';
+        });
+
+        // Toggle eye icon class for premium feel
+        document.getElementById('password-addon').addEventListener('click', function() {
+            var icon = this.querySelector('i');
+            if (icon.classList.contains('bi-eye')) {
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+
+        // Theme Toggle Script
+        (function() {
+            var themeToggleBtn = document.getElementById('login-theme-toggle');
+            var themeIcon = themeToggleBtn.querySelector('i');
+            
+            function updateToggleIcon() {
+                var currentMode = document.documentElement.getAttribute('data-layout-mode');
+                if (currentMode === 'dark') {
+                    themeIcon.className = 'bi bi-sun';
+                } else {
+                    themeIcon.className = 'bi bi-moon';
+                }
+            }
+            
+            // Set initial state
+            updateToggleIcon();
+
+            // themeToggleBtn.addEventListener('click', function() {
+            //     var currentMode = document.documentElement.getAttribute('data-layout-mode');
+            //     var targetMode = (currentMode === 'dark') ? 'light' : 'dark';
+                
+            //     document.documentElement.setAttribute('data-layout-mode', targetMode);
+            //     document.body.setAttribute('data-layout-mode', targetMode);
+            //     sessionStorage.setItem('is_visited', targetMode + '-mode-switch');
+            //     updateToggleIcon();
+            // });
+        })();
+    </script>
 </body>
 </html>

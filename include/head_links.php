@@ -1,5 +1,24 @@
 <head>
 
+    <!-- Dark Mode Flash Prevention Script -->
+    <script>
+        (function() {
+            var savedMode = sessionStorage.getItem("is_visited");
+            var isDark = savedMode === "dark-mode-switch" || (!savedMode && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            var mode = isDark ? "dark" : "light";
+            
+            document.documentElement.setAttribute("data-layout-mode", mode);
+            var observer = new MutationObserver(function(mutations, obs) {
+                var body = document.querySelector('body');
+                if (body) {
+                    body.setAttribute("data-layout-mode", mode);
+                    obs.disconnect();
+                }
+            });
+            observer.observe(document.documentElement, { childList: true, subtree: true });
+        })();
+    </script>
+
     <meta charset="utf-8" />
     <?php
     if (isset($_SESSION['id']) && $_SESSION['role'] == "retailer") {
@@ -13,7 +32,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo.png">
         <title>
             <?php
-                echo 'LogicBlaze - Water Management System';
+                echo (defined('APP_NAME') ? APP_NAME : 'Aquify') . ' - Water Management System';
 
             ?></title>
     <?php
@@ -27,12 +46,57 @@
 
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <!-- Custom Css override (loaded last) -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Preloader Skeleton Injector -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var preloader = document.getElementById("preloader");
+            // Skip if page has a custom skeleton (e.g. inquiry page)
+            if (preloader && !preloader.getAttribute("data-skeleton-type")) {
+                preloader.innerHTML = `
+                    <div class="skeleton-container">
+                        <div class="skeleton-sidebar">
+                            <div class="skeleton-logo"></div>
+                            <div class="skeleton-item" style="width: 80%"></div>
+                            <div class="skeleton-item" style="width: 60%"></div>
+                            <div class="skeleton-item" style="width: 70%"></div>
+                            <div class="skeleton-item" style="width: 85%"></div>
+                            <div class="skeleton-item" style="width: 50%"></div>
+                        </div>
+                        <div class="skeleton-content">
+                            <div class="skeleton-header">
+                                <div class="skeleton-button" style="width: 100px"></div>
+                                <div class="skeleton-avatar"></div>
+                            </div>
+                            <div class="skeleton-body">
+                                <div class="skeleton-title" style="width: 200px; height: 32px"></div>
+                                <div class="skeleton-row">
+                                    <div class="skeleton-card"></div>
+                                    <div class="skeleton-card"></div>
+                                    <div class="skeleton-card"></div>
+                                    <div class="skeleton-card"></div>
+                                </div>
+                                <div class="skeleton-table">
+                                    <div class="skeleton-table-header"></div>
+                                    <div class="skeleton-table-row"></div>
+                                    <div class="skeleton-table-row"></div>
+                                    <div class="skeleton-table-row"></div>
+                                    <div class="skeleton-table-row"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
     <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
