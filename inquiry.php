@@ -141,7 +141,7 @@ include "./include/connection.php";
     .parallax-bg .grid-overlay {
         position: absolute;
         inset: 0;
-        background-image: 
+        background-image:
             linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
         background-size: 60px 60px;
@@ -153,18 +153,22 @@ include "./include/connection.php";
             transform: translate(0, 0) scale(1);
             opacity: 0.35;
         }
+
         25% {
             transform: translate(40px, -25px) scale(1.15);
             opacity: 0.5;
         }
+
         50% {
             transform: translate(-25px, 45px) scale(0.85);
             opacity: 0.3;
         }
+
         75% {
             transform: translate(45px, 15px) scale(1.2);
             opacity: 0.45;
         }
+
         100% {
             transform: translate(-15px, -35px) scale(1);
             opacity: 0.35;
@@ -177,7 +181,7 @@ include "./include/connection.php";
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
         border: 1px solid rgba(255, 255, 255, 0.8) !important;
-        box-shadow: 
+        box-shadow:
             0 8px 32px 0 rgba(31, 38, 135, 0.08),
             inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
         border-radius: 16px !important;
@@ -201,7 +205,7 @@ include "./include/connection.php";
 
     .glass-card:hover {
         border-color: rgba(255, 255, 255, 0.95) !important;
-        box-shadow: 
+        box-shadow:
             0 12px 48px 0 rgba(31, 38, 135, 0.12),
             0 0 30px rgba(85, 110, 230, 0.04),
             inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
@@ -397,15 +401,47 @@ include "./include/connection.php";
         .parallax-bg .orb {
             filter: blur(60px);
         }
-        .parallax-bg .orb:nth-child(1) { width: 280px; height: 280px; }
-        .parallax-bg .orb:nth-child(2) { width: 320px; height: 320px; }
-        .parallax-bg .orb:nth-child(3) { width: 220px; height: 220px; }
-        .parallax-bg .orb:nth-child(4) { width: 180px; height: 180px; }
-        .parallax-bg .orb:nth-child(5) { width: 200px; height: 200px; }
-        .parallax-bg .orb:nth-child(6) { width: 160px; height: 160px; }
-        .parallax-bg .orb:nth-child(7) { width: 180px; height: 180px; }
-        .parallax-bg .orb:nth-child(8) { width: 150px; height: 150px; }
-        
+
+        .parallax-bg .orb:nth-child(1) {
+            width: 280px;
+            height: 280px;
+        }
+
+        .parallax-bg .orb:nth-child(2) {
+            width: 320px;
+            height: 320px;
+        }
+
+        .parallax-bg .orb:nth-child(3) {
+            width: 220px;
+            height: 220px;
+        }
+
+        .parallax-bg .orb:nth-child(4) {
+            width: 180px;
+            height: 180px;
+        }
+
+        .parallax-bg .orb:nth-child(5) {
+            width: 200px;
+            height: 200px;
+        }
+
+        .parallax-bg .orb:nth-child(6) {
+            width: 160px;
+            height: 160px;
+        }
+
+        .parallax-bg .orb:nth-child(7) {
+            width: 180px;
+            height: 180px;
+        }
+
+        .parallax-bg .orb:nth-child(8) {
+            width: 150px;
+            height: 150px;
+        }
+
         .glass-card {
             border-radius: 12px !important;
         }
@@ -426,8 +462,13 @@ include "./include/connection.php";
 
     /* ===== INQUIRY PAGE CUSTOM SKELETON LOADER ===== */
     @keyframes inq-shimmer {
-        0%   { background-position: -600px 0; }
-        100% { background-position:  600px 0; }
+        0% {
+            background-position: -600px 0;
+        }
+
+        100% {
+            background-position: 600px 0;
+        }
     }
 
     .inq-sk-shine {
@@ -458,9 +499,9 @@ include "./include/connection.php";
 
     /* Filter card */
     .inq-sk-card {
-        background: rgba(255,255,255,0.65);
+        background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(16px);
-        border: 1px solid rgba(255,255,255,0.7);
+        border: 1px solid rgba(255, 255, 255, 0.7);
         border-radius: 16px;
         padding: 24px;
         width: 100%;
@@ -531,9 +572,17 @@ include "./include/connection.php";
     }
 
     @media (max-width: 767px) {
-        .inq-sk-half { min-width: 100%; }
-        .inq-sk-field { min-width: 100%; }
-        .inq-sk-btn   { width: 100%; }
+        .inq-sk-half {
+            min-width: 100%;
+        }
+
+        .inq-sk-field {
+            min-width: 100%;
+        }
+
+        .inq-sk-btn {
+            width: 100%;
+        }
     }
 
 
@@ -565,9 +614,11 @@ include "./include/connection.php";
     .breadcrumb-item {
         color: rgba(0, 0, 0, 0.4) !important;
     }
+
     .breadcrumb-item.active {
         color: rgba(0, 0, 0, 0.6) !important;
     }
+
     .breadcrumb-item a {
         color: #556ee6 !important;
     }
@@ -628,14 +679,14 @@ include "./include/connection.php";
     <!-- ====== PARALLAX BLUR BACKGROUND - MULTI-COLOR ====== -->
     <div class="parallax-bg">
         <!-- 8 Different Color Orbs -->
-        <div class="orb"></div>  <!-- Blue -->
-        <div class="orb"></div>  <!-- Green -->
-        <div class="orb"></div>  <!-- Red -->
-        <div class="orb"></div>  <!-- Yellow -->
-        <div class="orb"></div>  <!-- Purple -->
-        <div class="orb"></div>  <!-- Orange -->
-        <div class="orb"></div>  <!-- Teal/Cyan -->
-        <div class="orb"></div>  <!-- Pink -->
+        <div class="orb"></div> <!-- Blue -->
+        <div class="orb"></div> <!-- Green -->
+        <div class="orb"></div> <!-- Red -->
+        <div class="orb"></div> <!-- Yellow -->
+        <div class="orb"></div> <!-- Purple -->
+        <div class="orb"></div> <!-- Orange -->
+        <div class="orb"></div> <!-- Teal/Cyan -->
+        <div class="orb"></div> <!-- Pink -->
         <div class="grid-overlay"></div>
     </div>
 
@@ -786,7 +837,7 @@ include "./include/connection.php";
                                         </thead>
                                         <tbody>
                                             <tr class="text-center">
-                                                <td class="text-gradient-primary fs-4 fw-bold">
+                                                <td class="text-dark fs-4 fw-bold">
                                                     <?php
                                                     $sqlRate = "SELECT rate FROM sale WHERE customer = $id AND MONTH(created_at) = $month AND YEAR(created_at) = $year";
                                                     $resultRate = mysqli_query($conn, $sqlRate);
@@ -850,7 +901,11 @@ include "./include/connection.php";
                                                                 <input type="number" name="can_deliver[]" class="form-control border-0 bg-transparent text-dark can_deliver<?php echo $day + 1 ?>" onkeyup="get_D(<?php echo $day + 1 ?>)" value="<?php echo (int)$value['D']; ?>" readonly>
                                                             </td>
                                                             <td><input type="number" name="can_return[]" class="form-control border-0 bg-transparent can_return<?php echo $day + 1 ?>" value="<?php echo (int)$value['R']; ?>" onkeyup="get_R(<?php echo $day + 1 ?>)" readonly></td>
-                                                            <td><input type="number" class="form-control <?php if ((int)$value['paid_ammount'] > 0) { echo "fw-bold text-success"; } else { echo "text-dark"; } ?> border-0 bg-transparent paid_ammount<?php echo $day + 1 ?>" value="<?php echo (int)$value['paid_ammount']; ?>" name="paid[]" readonly></td>
+                                                            <td><input type="number" class="form-control <?php if ((int)$value['paid_ammount'] > 0) {
+                                                                                                                echo "fw-bold text-success";
+                                                                                                            } else {
+                                                                                                                echo "text-dark";
+                                                                                                            } ?> border-0 bg-transparent paid_ammount<?php echo $day + 1 ?>" value="<?php echo (int)$value['paid_ammount']; ?>" name="paid[]" readonly></td>
                                                             <td>
                                                                 <input type="number" name="empty_can[]" class="form-control border-0 bg-transparent fw-bold text-dark empty_can<?php echo $day + 1 ?>" value="<?php echo $Tcan - $Rcan + $preE; ?>" readonly>
                                                             </td>
@@ -903,7 +958,24 @@ include "./include/connection.php";
                                                 </tr>
                                             </tbody>
                                         </table>
-
+                                        <table class="table mb-4 glass-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-dark">Month</th>
+                                                    <th class="text-dark">Total Cans</th>
+                                                    <th class="text-dark">Per Can Rate</th>
+                                                    <th class="text-dark">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="bg-primary bg-opacity-10 text-dark fw-semibold">
+                                                    <td><?php echo date('F', strtotime('1-' . $month . '-' . $year)) ?></td>
+                                                    <td><?php echo $Tcan;?></td>
+                                                    <td class="text-danger fw-bold"><?php echo $rowRate['rate']?></td>
+                                                    <td class="text-danger"><?= $Tcan*$rowRate['rate'] ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                         <!-- Payment Detail -->
                                         <div class="row mt-3">
                                             <div class="card-header glass-header text-center">
@@ -938,7 +1010,7 @@ include "./include/connection.php";
                                                     <h6 class="p-1 mb-0 fw-bold text-secondary">Current Bal.</h6>
                                                 </div>
                                                 <div class="col-6 text-start ps-3">
-                                                    <h6 class="p-1 mb-0 fw-bold text-gradient-primary">
+                                                    <h6 class="p-1 mb-0 fw-bold text-dark">
                                                         <?php
                                                         $total = $can * (int)($rowRate['rate'] ?? 0);
                                                         echo $total;
@@ -985,7 +1057,7 @@ include "./include/connection.php";
             <div class="row">
                 <div class="col">
                     <div class="text-sm-center d-none d-sm-block fw-bold text-dark" style="font-size:0.9rem;">
-                        Design & Develop with <i class="bi bi-heart-fill text-danger"></i> by 
+                        Design & Develop with <i class="bi bi-heart-fill text-danger"></i> by
                         <a href="<?php echo (defined('APP_URL') ? APP_URL : 'http://localhost/aquify'); ?>" class="text-decoration-none"><?php echo (defined('APP_NAME') ? APP_NAME : 'Aquify'); ?></a>
                     </div>
                 </div>
@@ -1019,4 +1091,5 @@ include "./include/connection.php";
     <?php include "./include/footer_link.php" ?>
     <!-- Footer Link End Here-->
 </body>
+
 </html>
