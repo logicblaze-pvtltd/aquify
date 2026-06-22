@@ -233,8 +233,7 @@ if (isset($_POST['login'])) {
             <div class="login-footer-copy">
                 <p>© <script>
                         document.write(new Date().getFullYear())
-                    </script> Designed & Developed with <i class="bi bi-heart-fill"></i> by <a href="<?php echo (defined('APP_URL') ? APP_URL : 'http://localhost/aquify'); ?>"><?php echo (defined('APP_NAME') ? APP_NAME : 'Aquify'); ?></a></p>
-            </div>
+                    </script> Designed & Developed with <i class="bi bi-heart-fill"></i> by <a href="https://logicblaze.co">LogicBlaze Technologies
         </div>
     </div>
 

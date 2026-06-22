@@ -1058,7 +1058,7 @@ include "./include/connection.php";
                 <div class="col">
                     <div class="text-sm-center d-none d-sm-block fw-bold text-dark" style="font-size:0.9rem;">
                         Design & Develop with <i class="bi bi-heart-fill text-danger"></i> by
-                        <a href="<?php echo (defined('APP_URL') ? APP_URL : 'http://localhost/aquify'); ?>" class="text-decoration-none"><?php echo (defined('APP_NAME') ? APP_NAME : 'Aquify'); ?></a>
+                        <a href="https://logicblaze.co" class="text-decoration-none">LogicBlaze Technologies</a>
                     </div>
                 </div>
             </div>
