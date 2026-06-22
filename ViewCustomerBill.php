@@ -70,57 +70,27 @@ if (!isset($_SESSION['id'])) {
                                         <form action="CustomerList.php" method="GET">
                                             <div class="row mt-5">
                                                 <div class="col">
-                                                    <label for="month">Select Month:</label>
-                                                    <select class="form-select" name="month" style="border: none;border-bottom: 2px solid #556ee6;border-radius:0; outline:none;">
-                                                        <option selected hidden>Month</option>
-                                                        <option value="01">January</option>
-                                                        <option value="02">February</option>
-                                                        <option value="03">March</option>
-                                                        <option value="04">April</option>
-                                                        <option value="05">May</option>
-                                                        <option value="06">June</option>
-                                                        <option value="07">July</option>
-                                                        <option value="08">August</option>
-                                                        <option value="09">September</option>
-                                                        <option value="10">October</option>
-                                                        <option value="11">November</option>
-                                                        <option value="12">December</option>
+                                                    <label for="year">Select Year:</label>
+                                                    <select class="form-select glass-input" name="year" id="yearSelect" style="border: none;border-bottom: 2px solid #556ee6;border-radius:0; outline:none;">
+                                                        <option selected hidden>-- Select Year --</option>
+                                                        <?php
+                                                        $sqlYear = "SELECT DISTINCT YEAR(created_at) AS sale_year FROM sale WHERE created_at IS NOT NULL ORDER BY sale_year DESC";
+                                                        $resultYear = mysqli_query($conn, $sqlYear);
+                                                        while ($rowYear = mysqli_fetch_assoc($resultYear)) {
+                                                            echo '<option value="' . $rowYear['sale_year'] . '">' . $rowYear['sale_year'] . '</option>';
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="col">
-                                                    <label for="year">Select Year:</label>
-                                                    <select class="form-select" name="year" style="border: none;border-bottom: 2px solid #556ee6;border-radius:0; outline:none;">
-                                                        <option selected hidden>Year</option>
-                                                        <option value="2010">2010</option>
-                                                        <option value="2011">2011</option>
-                                                        <option value="2012">2012</option>
-                                                        <option value="2013">2013</option>
-                                                        <option value="2014">2014</option>
-                                                        <option value="2015">2015</option>
-                                                        <option value="2016">2016</option>
-                                                        <option value="2017">2017</option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2019">2019</option>
-                                                        <option value="2020">2020</option>
-                                                        <option value="2021">2021</option>
-                                                        <option value="2022">2022</option>
-                                                        <option value="2023">2023</option>
-                                                        <option value="2024">2024</option>
-                                                        <option value="2025">2025</option>
-                                                        <option value="2026">2026</option>
-                                                        <option value="2027">2027</option>
-                                                        <option value="2028">2028</option>
-                                                        <option value="2029">2029</option>
-                                                        <option value="2030">2030</option>
-                                                        <option value="2031">2031</option>
-                                                        <option value="2032">2032</option>
-                                                        <option value="2033">2033</option>
-                                                        <option value="2034">2034</option>
+                                                    <label for="month">Select Month:</label>
+                                                    <select class="form-select glass-input" name="month" id="monthSelect" style="border: none;border-bottom: 2px solid #556ee6;border-radius:0; outline:none;">
+                                                        <option selected hidden>-- Select Year First --</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row mt-5">
-                                            <div class="col">
+                                                <div class="col">
                                                     <label for="area">Select Supplier:</label>
                                                     <select class="form-select" id="supplier_id" name="supplier_id" aria-label="Default select example" style="border: none;border-bottom: 2px solid #556ee6;border-radius:0; outline:none;">
                                                         <option hidden> Choose Supplier</option>
@@ -133,9 +103,9 @@ if (!isset($_SESSION['id'])) {
 
                                                         ?>
                                                                 <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                                                                
+
                                                         <?php
-                                                        
+
                                                             }
                                                         }
                                                         ?>
@@ -145,7 +115,7 @@ if (!isset($_SESSION['id'])) {
                                                 <div class="col">
                                                     <label for="area">Select Area:</label>
                                                     <select class="form-select" name="area_id" id="area_id" aria-label="Default select example" style="border: none;border-bottom: 2px solid #556ee6;border-radius:0; outline:none;">
-                                                        
+                                                        <option>--Select Area--</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -185,21 +155,45 @@ if (!isset($_SESSION['id'])) {
         <!-- Footer Link End Here-->
 
         <script>
-        $('#supplier_id').on('change', function() {
-            var supplier_id = this.value;
-            // alert(supplier_id);
-            
-            $.ajax({
-                type: "POST",
-                url:  "ajax/get_area.php",
-                data: {'supplier_id': supplier_id}
+            $('#supplier_id').on('change', function() {
+                var supplier_id = this.value;
+                // alert(supplier_id);
 
-            }).done(function (msg) {
-                $('#area_id').html(msg);
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/get_area.php",
+                    data: {
+                        'supplier_id': supplier_id
+                    }
+
+                }).done(function(msg) {
+                    $('#area_id').html(msg);
+                });
             });
-});
-    </script>
+        </script>
+        <!-- ====== SCRIPT ====== -->
+        <script>
+            document.getElementById('yearSelect').addEventListener('change', function() {
+                let selectedYear = this.value;
+                let monthSelect = document.getElementById('monthSelect');
+                monthSelect.innerHTML = '<option selected hidden>Loading...</option>';
+                if (selectedYear) {
+                    fetch('<?php echo (defined('APP_URL') ? APP_URL : "/aquify"); ?>/ajax/get_months.php?year=' + selectedYear)
+                        .then(response => response.text())
+                        .then(data => {
+                            monthSelect.innerHTML = '<option selected hidden>-- Select Month --</option>' + data;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching months:', error);
+                            monthSelect.innerHTML = '<option selected hidden>Error loading months</option>';
+                        });
+                } else {
+                    monthSelect.innerHTML = '<option selected hidden>-- Select Year First --</option>';
+                }
+            });
+        </script>
     </body>
+
     </html>
 <?php
 }

@@ -20,33 +20,33 @@
     </script>
 
     <meta charset="utf-8" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
+
     <?php
     if (isset($_SESSION['id']) && $_SESSION['role'] == "retailer") {
     ?>
-        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_io/android-chrome-512x512.png">
         <title>
-            <?php echo $_SESSION['name'] . ' - Dashboard';
-            ?>
-        </title><?php
-            } else { ?>
-            <link rel="shortcut icon" href="../assets/favicon_io/android-chrome-512x512.png">
-        <title>
-            <?php
-                echo (defined('APP_NAME') ? APP_NAME : 'Aquify') . ' - Water Management System';
-
-            ?></title>
+            <?php echo $_SESSION['name'] . ' - Dashboard'; ?>
+        </title>
     <?php
-            }
+    } else {
+    ?>
+        <title>
+            <?php echo (defined('APP_NAME') ? APP_NAME : 'Aquify') . ' - Water Management System'; ?>
+        </title>
+    <?php
+    }
     ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon_io/android-chrome-512x512.png">
 
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
