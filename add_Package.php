@@ -131,7 +131,9 @@ if (isset($_POST['submit'])) {
     if (!mysqli_query($conn, $sql)) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     } else {
-        echo '<script>alert("Package added Successfully");window.location.href="./add_Package.php";</script>';
+        $_SESSION['toast'] = ["type" => "success", "message" => "Package Added Successfully"];
+        header("Location: ./add_Package.php");
+        exit();
     }
 }
 ?>

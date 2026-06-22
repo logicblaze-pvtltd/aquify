@@ -14,7 +14,9 @@ if (!isset($_SESSION['id'])) {
         $areaUpdateSql = "UPDATE area SET `status` = 1 WHERE `id` = '$area'";
         $areaUpdateResult =  mysqli_query($conn, $areaUpdateSql);   
         if ($result && $areaUpdateResult) {
-            echo '<script>alert("Assign Area Successfully");</script>';
+            $_SESSION['toast'] = ["type" => "success", "message" => "Assign Area Successfully"];
+            header("Location: ./add_AssignArea.php");
+            exit();
         }
     }
 ?>

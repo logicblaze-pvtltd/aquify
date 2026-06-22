@@ -12,7 +12,9 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
     $days = 0;
     if (empty($email) || empty($password)) {
-        echo '<script>alert("All fields are required!!");window.location.href="./login.php";</script>';
+        $_SESSION['toast'] = ["type" => "error", "message" => "All fields are required!!"];
+        header("Location: ./login.php");
+        exit();
     } else {
         // Use prepared statements to prevent SQL injection
         $stmt = $conn->prepare("SELECT * FROM `users` WHERE `email` = ?");
@@ -31,13 +33,13 @@ if (isset($_POST['login'])) {
                     $stmtSelect = $conn->prepare("SELECT 
                     DATEDIFF(CURDATE(), p.created_at) AS days
                         FROM 
-                            payment p
+                             payment p
                         INNER JOIN 
-                            users u ON p.user = u.id
+                             users u ON p.user = u.id
                         WHERE 
-                            p.user = ?
-                            AND 
-                            p.id = (SELECT MAX(id) FROM payment WHERE user = ?);
+                             p.user = ?
+                             AND 
+                             p.id = (SELECT MAX(id) FROM payment WHERE user = ?);
                         ");
 
                     $stmtSelect->bind_param("ii", $uid, $uid);
@@ -61,8 +63,9 @@ if (isset($_POST['login'])) {
                                         if (!$stmtStatus->execute()) {
                                             error_log("Error updating status: " . $stmtStatus->error);
                                         } else {
-                                            echo '<script>alert("' . $_SESSION['days'] . '");</script>';
-                                            echo '<script>alert("Your account has been Disalbled Due to pending Payment");window.location.href="./login.php";</script>';
+                                            $_SESSION['toast'] = ["type" => "warning", "message" => "Your account has been Disabled Due to pending Payment"];
+                                            header("Location: ./login.php");
+                                            exit();
                                         }
                                     } else {
                                         $_SESSION['id'] = $uid;
@@ -73,13 +76,15 @@ if (isset($_POST['login'])) {
                                         $_SESSION['contact'] = $row['contact'];
                                         $_SESSION['status'] = 0;
                                         $_SESSION['image'] = $row['profile'];
-                                        echo '<script>alert("' . $_SESSION['days'] . '");</script>';
 
+                                        $_SESSION['toast'] = ["type" => "warning", "message" => "Grace period active. Days remaining: " . $rowSelect['days']];
                                         header('location:index.php');
                                         exit();
                                     }
                                 } else {
-                                    echo '<script>alert("Invalid Credentials");window.location.href="./login.php";</script>';
+                                    $_SESSION['toast'] = ["type" => "error", "message" => "Invalid Credentials"];
+                                    header("Location: ./login.php");
+                                    exit();
                                 }
                             }
                         } else {
@@ -92,17 +97,23 @@ if (isset($_POST['login'])) {
                                 $_SESSION['contact'] = $row['contact'];
                                 $_SESSION['status'] = $row['status'];
                                 $_SESSION['image'] = $row['profile'];
+                                
+                                $_SESSION['toast'] = ["type" => "success", "message" => "Login Successful! Welcome back."];
                                 header('location:index.php');
                                 exit();
                             } else {
-                                echo '<script>alert("Invalid Credentials");window.location.href="./login.php";</script>';
+                                $_SESSION['toast'] = ["type" => "error", "message" => "Invalid Credentials"];
+                                header("Location: ./login.php");
+                                exit();
                             }
                         }
                     } else {
                         echo "Error: " . $conn->error;
                     }
                 } else {
-                    echo '<script>alert("Your Account is not active yet Please contact the Aquify Team");window.location.href="./login.php";</script>';
+                    $_SESSION['toast'] = ["type" => "info", "message" => "Your Account is not active yet Please contact the Aquify Team"];
+                    header("Location: ./login.php");
+                    exit();
                 }
             } else {
                 if ($password == $row['password']) {
@@ -113,14 +124,20 @@ if (isset($_POST['login'])) {
                     $_SESSION['contact'] = $row['contact'];
                     $_SESSION['status'] = $row['status'];
                     $_SESSION['image'] = $row['profile'];
+                    
+                    $_SESSION['toast'] = ["type" => "success", "message" => "Login Successful! Welcome back."];
                     header('location:index.php');
                     exit();
                 } else {
-                    echo '<script>alert("Invalid Credentials");window.location.href="./login.php";</script>';
+                    $_SESSION['toast'] = ["type" => "error", "message" => "Invalid Credentials"];
+                    header("Location: ./login.php");
+                    exit();
                 }
             }
         } else {
-            echo '<script>alert("Account Not Registered");window.location.href="./login.php";</script>';
+            $_SESSION['toast'] = ["type" => "error", "message" => "Account Not Registered"];
+            header("Location: ./login.php");
+            exit();
         }
     }
 }

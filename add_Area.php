@@ -10,8 +10,9 @@ if (!isset($_SESSION['id'])) {
         $sql = "INSERT INTO `area`(`name`,`addby`) VALUES ('$area','$id')";
         $result = mysqli_query($conn,$sql);
         if($result){
-         echo '<script>alert("Area Added Successfully");</script>';
-            
+            $_SESSION['toast'] = ["type" => "success", "message" => "Area Added Successfully"];
+            header("Location: ./add_Area.php");
+            exit();
         }
     }
 ?>

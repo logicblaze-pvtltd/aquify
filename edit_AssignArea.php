@@ -153,11 +153,12 @@ if (!isset($_SESSION['id'])) {
   if (isset($_POST['update'])) {
     $area_id = $_POST['area_id'];
     $supplier_id = $_POST['supplier_id'];
-    echo $area_id;
     $sql = "UPDATE `assign_area` SET `supplier_id`= '$supplier_id' WHERE `id` = $assign_id";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-      echo '<script>alert("Updated Successfully");window.location.href="./manage_AssignArea.php";</script>';
+      $_SESSION['toast'] = ["type" => "success", "message" => "Assign Area Updated Successfully"];
+      header("Location: ./manage_AssignArea.php");
+      exit();
     }
   }
 }

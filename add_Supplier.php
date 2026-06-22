@@ -130,8 +130,9 @@ $sql = "INSERT INTO supplier(`name`,`contact`,`addby`) VALUES ('$name', '$contac
 if(!mysqli_query($conn,$sql)){
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);    
 }else{
-    echo '<script>alert("Supplier added Successfully");window.location.href="./add_Supplier.php";</script>';
-
+    $_SESSION['toast'] = ["type" => "success", "message" => "Supplier Added Successfully"];
+    header("Location: ./add_Supplier.php");
+    exit();
 }
 
 }

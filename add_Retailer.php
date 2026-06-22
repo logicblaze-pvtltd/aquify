@@ -168,7 +168,9 @@ if (isset($_POST['submit'])) {
     if (!mysqli_query($conn, $sql)) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     } else {
-        echo '<script>alert("Retailer added Successfully");window.location.href="./add_Retailer.php";</script>';
+        $_SESSION['toast'] = ["type" => "success", "message" => "Retailer Added Successfully"];
+        header("Location: ./add_Retailer.php");
+        exit();
     }
 }
 ?>

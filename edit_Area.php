@@ -10,7 +10,9 @@ if (!isset($_SESSION['id'])) {
         $sql = "UPDATE `area` SET `area_name` =  '$area' WHERE `id` = '$area_id'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            echo '<script>alert("ok");</script>';
+            $_SESSION['toast'] = ["type" => "success", "message" => "Area Updated Successfully"];
+            header("Location: ./manage_Area.php");
+            exit();
         }
     }
 ?>

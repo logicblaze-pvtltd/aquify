@@ -46,3 +46,34 @@
 <!-- alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- <script src="sweetalert2.min.js"></script> -->
+<?php
+if (isset($_SESSION['toast'])) {
+    $toast = $_SESSION['toast'];
+    $toastType = isset($toast['type']) ? $toast['type'] : 'success';
+    $toastMessage = isset($toast['message']) ? $toast['message'] : '';
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: document.documentElement.getAttribute('data-layout-mode') === 'dark' ? '#32394e' : '#fff',
+                color: document.documentElement.getAttribute('data-layout-mode') === 'dark' ? '#f6f6f6' : '#495057',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+            Toast.fire({
+                icon: '<?php echo $toastType; ?>',
+                title: '<?php echo addslashes($toastMessage); ?>'
+            });
+        });
+    </script>
+    <?php
+    unset($_SESSION['toast']);
+}
+?>

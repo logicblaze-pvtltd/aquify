@@ -792,8 +792,9 @@ include "./include/connection.php";
             $month  = $_POST['month'];
             $year   = $_POST['year'];
             if ($id == "" || $month == "" || $year == "") {
-                echo "<script>alert('All Fields Are Required!!');
-                window.location.href = 'inquiry.php';</script>";
+                $_SESSION['toast'] = ["type" => "error", "message" => "All Fields Are Required!!"];
+                header("Location: inquiry.php");
+                exit();
             }
         ?>
 
